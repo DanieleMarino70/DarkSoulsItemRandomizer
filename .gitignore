@@ -1,0 +1,13 @@
+# Installer build output: published as a GitHub Release asset, never committed
+installer/*.exe
+*.zip
+
+# Randomizer output if it is run from inside the repo folder
+random-seed-*/
+*.bak
+
+# Python / PyInstaller leftovers
+__pycache__/
+*.pyc
+build/
+*.spec

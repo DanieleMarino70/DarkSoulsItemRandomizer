@@ -1,0 +1,5 @@
+*.nsi text eol=crlf
+*.nsh text eol=crlf
+*.exe binary
+*.ico binary
+*.gif binary

@@ -1,5 +1,58 @@
 # Dark Souls Item Randomizer
 
+## Windows installer (unofficial fork)
+
+This fork adds a Windows installer for the randomizer. Download `DarkSoulsItemRandomizer-Setup.exe` from the
+[Releases page](https://github.com/DanieleMarino70/DarkSoulsItemRandomizer/releases/latest), run it, pick a language and follow the steps.
+
+What the installer does:
+
+* Finds Dark Souls: Remastered through Steam, also in Steam libraries on other drives. It also finds an unpacked
+Prepare to Die Edition (unpack it first with [UnpackDarkSoulsForModding](https://github.com/HotPocketRemix/UnpackDarkSoulsForModding)).
+If the game is not found, you can browse to the game folder yourself.
+* Copies `DarkSoulsItemRandomizer.exe` into the game folder.
+* Creates Start Menu and desktop shortcuts (both optional, on by default) that start the randomizer in the game folder.
+The randomizer needs this working directory to find `GameParam`.
+* Adds a "Restore original items" shortcut to the Start Menu folder. It copies the `.bak` backup back over `GameParam`.
+* Adds an uninstaller that restores the original `GameParam` from the `.bak` backup. It can also delete the generated
+`random-seed-*` folders.
+* Adds an optional Windows Firewall rule (on by default) that blocks the game from going online. Only the uninstaller
+removes this rule.
+* Shows a page with tips to play offline: set Launch Setting to "Start Offline" in the game's Network Settings, and
+turn off Steam Cloud for the game (or delete the randomized characters before you play online).
+* Has 10 languages: English (default), Italian, Spanish, French, German, Portuguese (Brazil), Russian, Polish,
+Japanese and Simplified Chinese.
+
+**Note:** the installer is not code-signed, so Windows SmartScreen can block it. Click "More info", then "Run anyway".
+
+To build the installer:
+
+1. Install NSIS 3: `winget install NSIS.NSIS`
+2. Build from the `installer` folder. The NSIS setup does not add `makensis` to PATH, so use its full path (PowerShell):
+
+   ```
+   cd installer
+   & "${env:ProgramFiles(x86)}\NSIS\makensis.exe" DarkSoulsItemRandomizer-Setup.nsi
+   ```
+
+   If the NSIS folder is on your PATH, `makensis DarkSoulsItemRandomizer-Setup.nsi` also works. The script packs `dist/DarkSoulsItemRandomizer.exe` and `favicon.ico` from the repository root. The output is
+   `installer/DarkSoulsItemRandomizer-Setup.exe`, which git ignores.
+
+To add a language, copy `installer/lang/English.nsh` to `installer/lang/<Name>.nsh`, where `<Name>` is the NSIS
+language name (for example `Dutch`). Translate the strings, change `${LANG_ENGLISH}` to the matching constant
+(for example `${LANG_DUTCH}`) and keep the file in UTF-8 with BOM. Then add `!insertmacro AddLanguage "<Name>"`
+to `installer/DarkSoulsItemRandomizer-Setup.nsi`, next to the other languages.
+
+Credits:
+
+* Item randomizer by [HotPocketRemix](https://github.com/HotPocketRemix/DarkSoulsItemRandomizer).
+* Windows installer by Danielao.
+
+This is an unofficial fork. For problems with the randomizer itself, see the
+[original repository](https://github.com/HotPocketRemix/DarkSoulsItemRandomizer).
+
+---
+
 Instructions:
 
 * (PTDE Only) Unpack your Dark Souls archive files using UnpackDarkSoulsForModding, which can be found [here](https://github.com/HotPocketRemix/UnpackDarkSoulsForModding).
