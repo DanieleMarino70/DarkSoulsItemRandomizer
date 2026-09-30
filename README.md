@@ -25,6 +25,13 @@ Japanese and Simplified Chinese.
 
 **Note:** the installer is not code-signed, so Windows SmartScreen can block it. Click "More info", then "Run anyway".
 
+**Antivirus warning (false positive):** some antivirus programs may flag the installer or `DarkSoulsItemRandomizer.exe`
+as malware. This is a false positive. Unsigned installers built with NSIS and programs packaged with PyInstaller are
+often flagged, and this installer also adds a Windows Firewall rule on purpose, to block the game online. You can check
+the download by comparing its SHA256 with the one in the release notes, or read the installer source in the `installer`
+folder and build it yourself (see below). If your antivirus blocks the file and the SHA256 matches, you can add an
+exception for it or report it as a false positive to the antivirus vendor.
+
 To build the installer:
 
 1. Install NSIS 3: `winget install NSIS.NSIS`
